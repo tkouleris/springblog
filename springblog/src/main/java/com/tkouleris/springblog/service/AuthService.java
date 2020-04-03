@@ -1,9 +1,14 @@
 package com.tkouleris.springblog.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.tkouleris.springblog.dto.LoginRequest;
 import com.tkouleris.springblog.dto.RegisterRequest;
 import com.tkouleris.springblog.model.User;
 import com.tkouleris.springblog.repository.UserRepository;
@@ -15,6 +20,8 @@ public class AuthService {
 	private UserRepository R_User;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private AuthenticationManager authManager;
 	
 	public void signUp(RegisterRequest registerRequest)
 	{
@@ -29,5 +36,11 @@ public class AuthService {
 	private String encodePassword(String password)
 	{
 		return passwordEncoder.encode(password);
+	}
+
+	public void login(LoginRequest loginRequest) 
+	{		
+		Authentication authenticate = authManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),loginRequest.getPassword()));
+		SecurityContextHolder.getContext().setAuthentication(authenticate);
 	}
 }
