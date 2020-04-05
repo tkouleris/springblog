@@ -12,6 +12,7 @@ import com.tkouleris.springblog.dto.LoginRequest;
 import com.tkouleris.springblog.dto.RegisterRequest;
 import com.tkouleris.springblog.model.User;
 import com.tkouleris.springblog.repository.UserRepository;
+import com.tkouleris.springblog.security.JwtProvider;
 
 @Service
 public class AuthService {
@@ -22,6 +23,8 @@ public class AuthService {
 	private PasswordEncoder passwordEncoder;
 	@Autowired
 	private AuthenticationManager authManager;
+	@Autowired
+	private JwtProvider jwtProvider;
 	
 	public void signUp(RegisterRequest registerRequest)
 	{
@@ -38,9 +41,10 @@ public class AuthService {
 		return passwordEncoder.encode(password);
 	}
 
-	public void login(LoginRequest loginRequest) 
+	public String login(LoginRequest loginRequest) 
 	{		
 		Authentication authenticate = authManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),loginRequest.getPassword()));
 		SecurityContextHolder.getContext().setAuthentication(authenticate);
+		return jwtProvider.generateToken(authenticate);
 	}
 }
