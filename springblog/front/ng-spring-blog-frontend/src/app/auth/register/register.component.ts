@@ -19,7 +19,6 @@ export class RegisterComponent implements OnInit {
       password: '',
       confirmPassword: ''
     });
-
     this.registerPayload = {
       username: '',
       email: '',
@@ -32,6 +31,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(){
+    console.log('on submit');
     this.registerPayload.username = this.registerForm.get('username').value;
     this.registerPayload.email = this.registerForm.get('email').value;
     this.registerPayload.password = this.registerForm.get('password').value;
