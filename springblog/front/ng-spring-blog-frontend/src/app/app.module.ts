@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule} from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import {Ng2Webstorage} from 'ngx-webstorage';
 
 @NgModule({
   declarations: [
@@ -25,8 +26,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    Ng2Webstorage.forRoot(),
     RouterModule.forRoot([
-      {path: 'register', component: RegisterComponent}
+      {path: 'register', component: RegisterComponent},
+      {path: 'login', component: LoginComponent},
+      {path: 'register-success', component: RegisterSuccessComponent},
     ]),
     HttpClientModule
   ],
