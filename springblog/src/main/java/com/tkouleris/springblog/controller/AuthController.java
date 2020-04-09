@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tkouleris.springblog.dto.LoginRequest;
 import com.tkouleris.springblog.dto.RegisterRequest;
 import com.tkouleris.springblog.service.AuthService;
+import com.tkouleris.springblog.service.AuthenticationResponse;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -28,7 +29,7 @@ public class AuthController {
 	}
 	
 	@PostMapping("/login")
-	public String login(@RequestBody LoginRequest loginRequest)
+	public AuthenticationResponse login(@RequestBody LoginRequest loginRequest)
 	{
 		return authService.login(loginRequest);		
 	}
