@@ -16,30 +16,25 @@ import com.tkouleris.springblog.dto.PostDto;
 import com.tkouleris.springblog.service.PostService;
 
 @RestController
-@RequestMapping("/api/post")
+@RequestMapping("/api/posts/")
 public class PostController {
-	
-	@Autowired
-	private PostService postService;
-	
-	@PostMapping
-	public ResponseEntity createPost(@RequestBody PostDto postDto)
-	{
-		postService.createPost(postDto);
-		return new ResponseEntity(HttpStatus.OK);
-	}
-	
-	@GetMapping("/all")
-	public ResponseEntity<List<PostDto>> showAllPosts()
-	{
-		return new ResponseEntity<>(postService.showAllPosts(),HttpStatus.OK);
-	}
-	
-	
-	@GetMapping("/get/{id}")
-	public ResponseEntity<PostDto> getSinglePost(@PathVariable @RequestBody Long id)
-	{
-		return new ResponseEntity<>(postService.readSinglePost(id), HttpStatus.OK);
-	}
 
+    @Autowired
+    private PostService postService;
+
+    @PostMapping
+    public ResponseEntity createPost(@RequestBody PostDto postDto) {
+        postService.createPost(postDto);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<PostDto>> showAllPosts() {
+        return new ResponseEntity<>(postService.showAllPosts(), HttpStatus.OK);
+    }
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<PostDto> getSinglePost(@PathVariable @RequestBody Long id) {
+        return new ResponseEntity<>(postService.readSinglePost(id), HttpStatus.OK);
+    }
 }
