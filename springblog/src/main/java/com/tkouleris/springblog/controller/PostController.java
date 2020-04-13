@@ -16,7 +16,7 @@ import com.tkouleris.springblog.dto.PostDto;
 import com.tkouleris.springblog.service.PostService;
 
 @RestController
-@RequestMapping("/api/posts/")
+@RequestMapping("/api/posts")
 public class PostController {
 
     @Autowired
